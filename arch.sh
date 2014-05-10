@@ -8,11 +8,9 @@ ask () {
 }
 
 
-apt-get update
+sudo pacman -Syu
+sudo pacman -S gvim guake git ghc
 
-yes | apt-get upgrade
-
-yes | apt-get install build-essential vim guake git unrar flashplugin-downloader flashplugin-installer
 
 git config --global user.email "whatever@mail.com"
 git config --global user.name  "Versus Void"
@@ -69,100 +67,44 @@ Section "InputClass"\
 #       simultaneously to emulate a middle-click or wheel click.\
         Option "Emulate3Buttons" "true"\
 #       Option "Emulate3Buttons" "true"              # Factory default.\
-EndSection' >> /usr/share/X11/xorg.conf.d/10-evdev.conf
+EndSection' >> /etc/X11/xorg.conf.d/10-evdev.conf
 
 if ask "Change sound card" then
-    echo '\
-pcm.!default {\
-    type plug\
-    slave.pcm "dmix:CARD=1,DEVICE=0,RATE=48000"\
-}' > .asoundrc
-    echo -e "defaults.pcm.card 1\ndefaults.pcm.device 0\ndefaults.ctl.card 1" > /etc/asound.conf;
+    echo '
+pcm.!default {
+    type hw
+    card PCH
+}
+
+ctl.!default {
+    type hw           
+    card PCH
+}' > ~/.asoundrc
 fi
 
 amixer sset Master unmute
 
-mkdir Documents/configs
-pushd Documents/configs
-git init
-git remote add origin https://github.com/versusvoid/configs.git
-git fetch
-git checkout master
-cp .bashrc .vimrc ~/
+test -d ~/Documents || mkdir ~/Documents
+pushd Documents
+git clone https://github.com/versusvoid/configs.git
+cp configs/.bashrc ~/
+configs/init-vim.sh
 popd
 
 . .bashrc
 
-# -- ghc
-pushd /usr/lib/i386-linux-gnu
-ln -s libgmp.so.10.0.5 libgmp.so.3
-popd
-
-pushd $HOME/Downloads
-wget http://www.haskell.org/ghc/dist/7.6.3/ghc-7.6.3-i386-unknown-linux.tar.bz2
-tar -xf ghc-7.6.3-i386-unknown-linux.tar.bz2
-pushd ghc-7.6.3
-./configure --prefix=$HOME && make install
-popd
-rm -r ghc-7.6.3*
 # -- cabal
-yes | apt-get install libgmp-dev libzip-dev
-wget http://hackage.haskell.org/packages/archive/cabal-install/1.16.0.2/cabal-install-1.16.0.2.tar.gz
-tar -xf cabal-install-1.16.0.2.tar.gz
-pushd cabal-install-1.16.0.2
-sed -i '{ s/DEFAULT_PREFIX=.*/DEFAULT_PREFIX="${HOME}"/;
-	  s#${EXTRA_CONFIGURE_OPTS}#--package-db='$(~/bin/ghc-pkg list | head -n 1 | sed s/://)'#;
-          /Setup install/ i\
-  ./Setup haddock ${VERBOSE} \\\
-    || die "Documenting the ${PKG} package failed"
+wget http://hackage.haskell.org/packages/archive/cabal-install/1.20.0.1/cabal-install-1.20.0.1.tar.gz
+tar -xf cabal-install-1.20.0.1.tar.gz
+pushd cabal-install-1.20.0.1
 
-;}' bootstrap.sh
 chmod u+x bootstrap.sh
-./bootstrap.sh
+PREFIX=$HOME ./bootstrap.sh
 popd
 rm -r cabal-install*
 popd
 
 cabal update
-cabal-install hscolor
-cabal-install happy
-cabal-install ghc-mod
+pacman -S happy
 
-# -- vim
-pushd .vim
-
-mkdir autoload bundle syntax
-wget -P syntax https://raw.github.com/urso/haskell_syntax.vim/master/syntax/haskell.vim
-wget -P autoload https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
-pushd bundle
-
-git clone https://github.com/scrooloose/syntastic.git
-yes | rm -r syntastic/.git*
-
-git clone https://github.com/Shougo/vimproc.vim.git
-yes | rm -r vimproc.vim/.git*
-pushd vimproc.vim
-make
-popd
-
-git clone https://github.com/eagletmt/ghcmod-vim.git
-yes | rm -r ghcmod-vim/.git* *.sh
-popd
-
-git clone https://github.com/Shougo/neocomplete.vim.git
-cp -r neocomplete.vim/{autoload,doc,plugin,vest} ./
-yes | rm -r neocomplete.vim
-
-git clone https://github.com/ujihisa/neco-ghc.git
-cp -r neco-ghc/autoload ./
-yes | rm -r neco-ghc
-
-mkdir spell
-wget -P spell http://ftp.vim.org/vim/runtime/spell/ru.utf-8.spl
-
-popd
-
-mkdir Programming
-
-sed -i 's#\(OnlyShowIn=.*\)#\1LXDE;#' /etc/xdg/autostart/gnome-keyring-pkcs11.desktop
-echo '127.0.0.1   vk.com' >> /etc/host
+test -d ~/Programming || mkdir ~/Programming

@@ -27,7 +27,7 @@ nmap <silent> <F8> :w<CR>
 " Haskell
 filetype plugin indent on
 
-let g:neocomplcache_enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 1
 let g:necoghc_enable_detailed_browse = 1
 
 let g:syntastic_java_javac_autoload_maven_classpath = 0
