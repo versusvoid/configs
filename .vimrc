@@ -1,59 +1,49 @@
-syntax enable
-set background=dark
-
-set smartindent
-set tabstop=4
-set shiftwidth=4
-set expandtab
-
-set incsearch
-set smartcase
+so /usr/share/vim/vim80/defaults.vim
 set hlsearch
-
+set ignorecase
+set smartcase
 set foldmethod=indent
-
-set lbr
-
-" <Ctrl-l> redraws the screen and removes any search highlighting.
+set nofixendofline
+filetype off
 nnoremap <silent> <C-l> :nohl<CR><C-l>
+nnoremap <silent> <C-s> :w<CR><C-s>
 
-nmap <expr> <PageDown> (winheight(0)/2) . "gj"
-imap <silent> <PageDown> <Esc><PageDown>i
-nmap <expr> <PageUp> (winheight(0)/2) . "gk"
-imap <silent> <PageUp> <Esc><PageUp>i
-imap <silent> <F8> <Esc>:w<CR>a
-nmap <silent> <F8> :w<CR>
+set langmap=ё`йqцwуeкrеtнyгuшiщoзpх[ъ]фaыsвdаfпgрhоjлkдlж\\;э'яzчxсcмvиbтnьmб\\,ю.Ё~ЙQЦWУEКRЕTНYГUШIЩOЗPХ{Ъ}ФAЫSВDАFПGРHОJЛKДLЖ:Э\\"ЯZЧXСCМVИBТNЬMЮ>Б<
 
-" Haskell
-filetype plugin indent on
+call vundle#begin()
 
-let g:neocomplete#enable_at_startup = 1
-let g:necoghc_enable_detailed_browse = 1
+Plugin 'dag/vim-fish'
+Plugin 'rust-lang/rust.vim'
+Plugin 'racer-rust/vim-racer'
 
-let g:syntastic_java_javac_autoload_maven_classpath = 0
-let g:syntastic_haskell_ghc_mod_args = '--hlintOpt="--ignore=Redundant $"'
-let g:syntastic_check_on_open = 1
+call vundle#end()
+set hidden
+let g:racer_cmd = "racer"
 
-execute pathogen#infect()
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <Leader>gd <Plug>(rust-doc)
 
-nmap <silent> <F1> :help<CR>
-nmap <silent> <F3> :GhcModType<CR>
-nmap <silent> <F4> :GhcModTypeClear<CR>
-nmap <silent> <F5> :GhcModCheck<CR>
-nmap <silent> <F6> :GhcModLint<CR>
+filetype plugin on
+autocmd BufWritePre * %s/\s\+$//e
+
+if $USER == "root"
+	colorscheme torte
+endif
 
 "iabbrev alpha   α
 "iabbrev beta    β
 "iabbrev gamma   γ
 "iabbrev delta   δ
-"iabbrev epsilon ε 
+"iabbrev epsilon ε
 "iabbrev zeta    ζ
 "iabbrev eta     η
 "iabbrev theta   θ
 "iabbrev iota    ι
 "iabbrev kappa   κ
-iabbrev lambda  λ
-iabbrev mu      μ
+"iabbrev lambda  λ
+"iabbrev mu      μ
 "iabbrev nu      ν
 "iabbrev xi      ξ
 "iabbrev omicron ο
@@ -66,3 +56,5 @@ iabbrev mu      μ
 "iabbrev chi     χ
 "iabbrev psi     ψ
 "iabbrev omega   ω
+
+" TODO download http://ftp.vim.org/vim/runtime/spell/ru.utf-8.spl and put into ~/.vim/spell
