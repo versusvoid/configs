@@ -49,7 +49,11 @@ function fish_prompt --description 'Write out the prompt'
 			end
 			printf "%s.%s\n" $s $mil
 		end
-		printf '[%s] %s%s%s\f\r> ' (date "+%H:%M:%S") "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal"
-
+		set -l ssh_note
+		if set -q SSH_TTY
+			set ssh_note "[ssh]"
+		end
+		printf '[%s] %s%s%s\f\r%s%s%s> ' (date "+%H:%M:%S") "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" \
+			(set_color -o red) $ssh_note (set_color normal)
 	end
 end
