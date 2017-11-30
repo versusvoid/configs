@@ -43,11 +43,11 @@ function fish_prompt --description 'Write out the prompt'
 			set -l h (math "$t / 60")
 			printf " in "
 			if test $h -gt 0
-				printf "%s:%s:" $h $m
+				printf "%02d:%02d:" $h $m
 			else if test $m -gt 0
-				printf "%s:" $m
+				printf "%02d:" $m
 			end
-			printf "%s.%s\n" $s $mil
+			printf "%02d.%s\n" $s $mil
 		end
 		set -l ssh_note
 		if set -q SSH_TTY
