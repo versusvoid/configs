@@ -4,6 +4,7 @@ set ignorecase
 set smartcase
 set foldmethod=indent
 set nofixendofline
+set wildmode=longest:full
 filetype off
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 nnoremap <silent> <C-s> :w<CR><C-s>
