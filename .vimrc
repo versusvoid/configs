@@ -1,10 +1,18 @@
-so /usr/share/vim/vim80/defaults.vim
+so $VIMRUNTIME/defaults.vim
+
 set hlsearch
 set ignorecase
 set smartcase
+set incsearch
+
+set smartindent
 set foldmethod=indent
 set nofixendofline
 set wildmode=longest:full
+
+set linebreak
+set fileencodings=utf-8,cp1251
+
 filetype off
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 nnoremap <silent> <C-s> :w<CR><C-s>
@@ -22,8 +30,8 @@ endif
 call vundle#begin()
 
 Plugin 'dag/vim-fish'
-Plugin 'rust-lang/rust.vim'
-Plugin 'racer-rust/vim-racer'
+"Plugin 'rust-lang/rust.vim'
+"Plugin 'racer-rust/vim-racer'
 
 call vundle#end()
 set hidden
@@ -41,6 +49,7 @@ if $USER == "root"
 	colorscheme torte
 endif
 
+"autocmd FileType python iabbrev <buffer> alpha   α
 "iabbrev alpha   α
 "iabbrev beta    β
 "iabbrev gamma   γ
