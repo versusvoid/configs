@@ -1,6 +1,6 @@
 set -x EDITOR vim
 set -x BROWSER chromium
-set -X RUSTC_WRAPPER sccache
+set -x RUSTC_WRAPPER sccache
 
 function fish_greeting
     echo use z as cd
