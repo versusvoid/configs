@@ -1,6 +1,6 @@
 function make-arch-container
-	mkdir -p $args[1]
-	sudo pacstrap -i -c $args[1] \
+	mkdir -p $argv[1]
+	sudo pacstrap -i -c $argv[1] \
 		bash-completion \
 		fakeroot \
 		file \
