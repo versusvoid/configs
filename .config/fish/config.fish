@@ -45,6 +45,8 @@ alias fgrep='fgrep --color=auto'
 alias diff='diff --color=auto'
 alias tar='bsdtar'
 alias vi=nvim
+alias poweroff='systemctl poweroff'
+alias reboot='systemctl reboot'
 
 if functions -q fzf_key_bindings
     fzf_key_bindings
