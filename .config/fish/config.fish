@@ -1,5 +1,8 @@
-set -x EDITOR vim
-set -x BROWSER chromium
+#set -x CC /usr/bin/clang
+#set -x CXX /usr/bin/clang++
+set -x VISUAL nvim
+set -x EDITOR nvim
+set -x BROWSER firefox-developer-edition
 set -x RUSTC_WRAPPER sccache
 
 function fish_greeting
@@ -35,14 +38,13 @@ set -e ff
 
 set -x EMSCRIPTEN "/usr/lib/emscripten"
 set -x EMSCRIPTEN_FASTCOMP "/usr/lib/emscripten-fastcomp"
-set -x PATH $PATH $EMSCRIPTEN
-
-#set -x PYTHONSTARTUP $HOME/.python2rc
+#set -x PATH $PATH $EMSCRIPTEN
 
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias diff='diff --color=auto'
 alias tar='bsdtar'
+alias vi=nvim
 
 if functions -q fzf_key_bindings
     fzf_key_bindings
