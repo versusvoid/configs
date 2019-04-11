@@ -32,15 +32,15 @@ function fish_prompt --description 'Write out the prompt'
 		if test $stats[1] != 0
 			printf "%s -> [%s]%s\n" (set_color -o red) $stats[1] (set_color normal)
 		end
-		if test $stats[2] -gt 30000
+		if test $stats[2] -gt 10000
 			set -l mil (math "$stats[2] % 1000")
-			set -l t (math "$stats[2] / 1000")
+			set -l t (math -s0 "$stats[2] / 1000")
 
-			set -l s (math "$t % 60")
-			set -l t (math "$t / 60")
+			set -l s (math -s0 "$t % 60")
+			set -l t (math -s0 "$t / 60")
 
-			set -l m (math "$t % 60")
-			set -l h (math "$t / 60")
+			set -l m (math -s0 "$t % 60")
+			set -l h (math -s0 "$t / 60")
 			printf " in "
 			if test $h -gt 0
 				printf "%02d:%02d:" $h $m
