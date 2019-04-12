@@ -53,6 +53,7 @@ filetype plugin on
 autocmd BufWritePre * %s/\s\+$//e
 
 if $USER == "root"
-	colorscheme torte
+	colorscheme murphy
+	highlight Normal ctermbg=DarkRed
 endif
 "set background=light
