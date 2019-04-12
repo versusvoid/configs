@@ -6,13 +6,8 @@ set -x BROWSER firefox-developer-edition
 set -x RUSTC_WRAPPER sccache
 
 function fish_greeting
-    echo use z as cd
-    echo use fzf '(Ctrl+T)'
-    echo use bat as cat
     echo use fn fr ffn ffr fdn fdr
-    echo use rg as grep
     echo use peco as interactive grep
-    echo use ncdu as du
 end
 
 function smiley
