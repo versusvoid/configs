@@ -40,6 +40,8 @@ alias diff='diff --color=auto'
 alias tar='bsdtar'
 alias poweroff='systemctl poweroff'
 alias reboot='systemctl reboot'
+alias suspend='systemctl suspend'
+alias view=$EDITOR
 
 if functions -q fzf_key_bindings
     fzf_key_bindings
