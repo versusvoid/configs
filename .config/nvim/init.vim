@@ -45,12 +45,22 @@ Plug 'w0rp/ale'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'HerringtonDarkholme/yats.vim'
+Plug 'altercation/vim-colors-solarized'
 call plug#end()
 
 set hidden
 
 filetype plugin on
 autocmd BufWritePre * %s/\s\+$//e
+
+if system("dconf read '/apps/guake/style/font/palette-name'") ==? "'Solarized Light'\n" &&
+\		system("pstree -ps " . getpid() . "| grep -o guake") ==? "guake\n"
+	set background=light
+else
+	let g:solarized_termcolors=256
+	set background=dark
+endif
+colorscheme solarized
 
 if $USER == "root"
 	colorscheme murphy
