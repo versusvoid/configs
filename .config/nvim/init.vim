@@ -58,17 +58,14 @@ if system("pstree -ps " . getpid() . "| grep -o guake") ==? "guake\n"
 else
 	let guake = 0
 endif
-"let g:solarized_termcolors = 256
-let g:solarized_contrast = "high"
 if system("dconf read '/apps/guake/style/font/palette-name'") ==? "'Solarized Light'\n" && guake
 	set background=light
+	let g:solarized_contrast = "high"
+	let g:solarized_termtrans = 1
+	colorscheme solarized
 else
 	set background=dark
 endif
-if guake
-	let g:solarized_termtrans = 1
-endif
-colorscheme solarized
 
 
 if $USER == "root"
