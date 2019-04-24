@@ -53,14 +53,23 @@ set hidden
 filetype plugin on
 autocmd BufWritePre * %s/\s\+$//e
 
-if system("dconf read '/apps/guake/style/font/palette-name'") ==? "'Solarized Light'\n" &&
-\		system("pstree -ps " . getpid() . "| grep -o guake") ==? "guake\n"
+if system("pstree -ps " . getpid() . "| grep -o guake") ==? "guake\n"
+	let guake = 1
+else
+	let guake = 0
+endif
+"let g:solarized_termcolors = 256
+let g:solarized_contrast = "high"
+if system("dconf read '/apps/guake/style/font/palette-name'") ==? "'Solarized Light'\n" && guake
 	set background=light
 else
-	let g:solarized_termcolors=256
 	set background=dark
 endif
+if guake
+	let g:solarized_termtrans = 1
+endif
 colorscheme solarized
+
 
 if $USER == "root"
 	colorscheme murphy
