@@ -38,8 +38,6 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias diff='diff --color=auto'
 alias tar='bsdtar'
-alias poweroff='systemctl poweroff'
-alias reboot='systemctl reboot'
 alias suspend='systemctl suspend'
 alias view=$EDITOR
 
