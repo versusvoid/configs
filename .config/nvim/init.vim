@@ -46,6 +46,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/pgsql.vim'
 call plug#end()
 
 set hidden
@@ -72,4 +73,5 @@ if $USER == "root"
 	colorscheme murphy
 	highlight Normal ctermbg=DarkRed
 endif
-"set background=light
+
+au BufRead,BufNewFile *  if &ft == 'python' | set ft=pysql | endif
