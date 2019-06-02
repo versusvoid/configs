@@ -19,6 +19,7 @@ set ignorecase
 set smartcase
 set incsearch
 
+let g:pyindent_open_paren = 'shiftwidth()'
 set smartindent
 set foldmethod=indent
 set nofixendofline
@@ -74,4 +75,3 @@ if $USER == "root"
 	highlight Normal ctermbg=DarkRed
 endif
 
-au BufRead,BufNewFile *  if &ft == 'python' | set ft=pysql | endif
