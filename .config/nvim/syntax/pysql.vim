@@ -20,7 +20,7 @@ syn region  pythonRawString matchgroup=pythonQuotes
       \ contains=@Spell keepend
 
 syn region SQLEmbedded contains=@SQL containedin=pythonString,pythonRawString contained
-    \ start=+\v(with|alter|begin|comment|commit|create|delete|drop|end|explain|grant|insert|revoke|rollback|select|set|truncate|unset|update)+
+    \ start=+\v(with|alter|begin|commit|create|delete|drop|end|explain|grant|insert|revoke|rollback|select|set|truncate|unset|update)\>+
     \ end=+;+
 
 let b:current_syntax = "pysql"
