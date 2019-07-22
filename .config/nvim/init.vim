@@ -26,6 +26,8 @@ set nofixendofline
 set wildmode=longest:full
 "set bufhidden=wipe
 set hidden
+set tabpagemax=10
+set switchbuf=usetab
 
 set linebreak
 set fileencodings=utf-8,cp1251
