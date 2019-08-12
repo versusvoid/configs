@@ -39,6 +39,7 @@ nnoremap <C-_> :Rg<cr>
 nnoremap <silent> <C-s> :w<CR><C-s>
 
 set langmap=ё`йqцwуeкrеtнyгuшiщoзpх[ъ]фaыsвdаfпgрhоjлkдlж\\;э'яzчxсcмvиbтnьmб\\,ю.Ё~ЙQЦWУEКRЕTНYГUШIЩOЗPХ{Ъ}ФAЫSВDАFПGРHОJЛKДLЖ:Э\\"ЯZЧXСCМVИBТNЬMЮ>Б<
+iabbrev №   #
 
 let g:ale_linters = {'python': ['flake8']}
 call plug#begin('~/.local/share/nvim/site/plugged')
