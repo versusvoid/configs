@@ -24,11 +24,6 @@ set smartindent
 set foldmethod=indent
 set nofixendofline
 set wildmode=longest:full
-"set bufhidden=wipe
-set hidden
-set tabpagemax=10
-set switchbuf=usetab
-
 set linebreak
 set fileencodings=utf-8,cp1251
 
@@ -41,6 +36,28 @@ nnoremap <silent> <C-s> :w<CR><C-s>
 set langmap=ё`йqцwуeкrеtнyгuшiщoзpх[ъ]фaыsвdаfпgрhоjлkдlж\\;э'яzчxсcмvиbтnьmб\\,ю.Ё~ЙQЦWУEКRЕTНYГUШIЩOЗPХ{Ъ}ФAЫSВDАFПGРHОJЛKДLЖ:Э\\"ЯZЧXСCМVИBТNЬMЮ>Б<
 iabbrev №   #
 
+function! s:switch_or_open(lines)
+        for tabIndex in range(tabpagenr('$'))
+		for bufferIndex in tabpagebuflist(tabIndex + 1)
+			let bufinfo = getbufinfo(bufferIndex)[0]
+			for lineIndex in range(len(a:lines))
+				let line = fnamemodify(a:lines[lineIndex], ':p')
+				if bufinfo['name'] ==# line
+					execute "tabnext" (tabIndex + 1)
+					call remove(a:lines, lineIndex)
+					break
+				endif
+			endfor
+		endfor
+        endfor
+
+	for line in a:lines
+		execute "tab split" line
+	endfor
+endfunction
+
+let g:fzf_action = { 'ctrl-t': function('s:switch_or_open') }
+
 let g:ale_linters = {'python': ['flake8']}
 call plug#begin('~/.local/share/nvim/site/plugged')
 Plug 'dag/vim-fish'
@@ -50,7 +67,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'altercation/vim-colors-solarized'
-Plug 'lifepillar/pgsql.vim'
 call plug#end()
 
 set hidden
