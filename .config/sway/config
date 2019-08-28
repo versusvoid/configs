@@ -1,0 +1,42 @@
+output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+
+set $term alacritty
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+q kill
+bindsym $mod+d exec $menu
+
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod normal
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+input * xkb_layout "us,ru"
+input * xkb_options "grp:win_space_toggle"
+input "MANUFACTURER1 Keyboard" xkb_model "microsoft4000"
+bindsym --to-code {
+  $mod+$left focus left
+  $mod+$down focus down
+  $mod+$up focus up
+  $mod+$right focus right
+}
+bindsym F12 exec guake-toggle
+
+for_window [app_id="guake"] floating enable; sticky enable; move position 0 0
+
+exec guake
+exec waybar
