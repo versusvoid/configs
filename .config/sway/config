@@ -2,15 +2,21 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 # Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
+set $left Left
+set $down Down
+set $up Up
+set $right Right
 
 set $term alacritty
+set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $lock swaylock -f -kl -c 000000
+
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec $menu
+bindsym Alt+F2 exec $menu
+bindsym Print exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H-%M-%S.png')
+bindsym Shift+Print exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H-%M-%S.png')
+bindsym --to-code $mod+l exec $lock
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -20,23 +26,64 @@ bindsym $mod+d exec $menu
 floating_modifier $mod normal
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym --to-code $mod+Shift+c reload
 
 # exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
 input * xkb_layout "us,ru"
-input * xkb_options "grp:win_space_toggle"
-input "MANUFACTURER1 Keyboard" xkb_model "microsoft4000"
-bindsym --to-code {
-  $mod+$left focus left
-  $mod+$down focus down
-  $mod+$up focus up
-  $mod+$right focus right
-}
+input * xkb_options "grp:win_space_toggle, grp:caps_toggle, grp_led:scroll"
+#input * xkb_options "grp:win_space_toggle, grp_led:scroll"
+#bindsym --to-code Caps_Lock input * xkb_switch_layout 1; exec pkill -RTMIN+1 waybar
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+exec pactl set-source-mute @DEFAULT_SOURCE@ 1
+
+bindsym F11 fullscreen toggle; move position 0 0
 bindsym F12 exec guake-toggle
-
 for_window [app_id="guake"] floating enable; sticky enable; move position 0 0
-
 exec guake
-exec waybar
+
+bar {
+	swaybar_command waybar
+}
+
+hide_edge_borders vertical
+
+exec swayidle -w \
+	timeout 300 "$lock" \
+	timeout 360 'swaymsg "output * dpms off"' \
+		resume 'swaymsg "output * dpms on"' \
+	before-sleep "$lock"
+
+# Switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+include local.config

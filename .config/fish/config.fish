@@ -40,6 +40,7 @@ alias diff='diff --color=auto'
 alias tar='bsdtar'
 alias suspend='systemctl suspend'
 alias view=$EDITOR
+alias less='less -R'
 
 if functions -q fzf_key_bindings
     fzf_key_bindings

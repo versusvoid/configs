@@ -58,7 +58,10 @@ endfunction
 
 let g:fzf_action = { 'ctrl-t': function('s:switch_or_open') }
 
-let g:ale_linters = {'python': ['flake8']}
+let g:ale_linters = {
+\	'python': ['flake8'],
+\	'java': ['javalsp']
+\}
 call plug#begin('~/.local/share/nvim/site/plugged')
 Plug 'dag/vim-fish'
 Plug 'junegunn/fzf.vim'
