@@ -12,7 +12,7 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $lock swaylock -f -kl -c 000000
 
 bindsym $mod+Return exec $term
-bindsym $mod+Shift+q kill
+bindsym --to-code $mod+Shift+q kill
 bindsym Alt+F2 exec $menu
 bindsym Print exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H-%M-%S.png')
 bindsym Shift+Print exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H-%M-%S.png')
@@ -29,7 +29,7 @@ floating_modifier $mod normal
 bindsym --to-code $mod+Shift+c reload
 
 # exit sway (logs you out of your Wayland session)
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+bindsym --to-code $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
 input * xkb_layout "us,ru"
 input * xkb_options "grp:win_space_toggle, grp:caps_toggle, grp_led:scroll"

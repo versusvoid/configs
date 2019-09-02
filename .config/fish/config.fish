@@ -1,3 +1,4 @@
+# vi: expandtab shiftwidth=4
 #set -x CC /usr/bin/clang
 #set -x CXX /usr/bin/clang++
 set -x VISUAL nvim
@@ -31,9 +32,6 @@ eval (echo $ff | sed '{s/-type f//g; s/ffn/fn/g;}')
 eval (echo $ff | sed '{s/-type f//g; s/iname/iregex/g; s/ffn/fr/g;}')
 set -e ff
 
-set -x EMSCRIPTEN "/usr/lib/emscripten"
-set -x EMSCRIPTEN_FASTCOMP "/usr/lib/emscripten-fastcomp"
-
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias diff='diff --color=auto'
@@ -44,4 +42,11 @@ alias less='less -R'
 
 if functions -q fzf_key_bindings
     fzf_key_bindings
+end
+
+if test -z "$SSH_AUTH_SOCK"
+    if ! pgrep -u "$USER" ssh-agent > /dev/null
+        ssh-agent -c | head -n 2 > "$XDG_RUNTIME_DIR/ssh-agent.env"
+    end
+    eval (cat $XDG_RUNTIME_DIR/ssh-agent.env)
 end
