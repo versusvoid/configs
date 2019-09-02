@@ -33,8 +33,6 @@ bindsym --to-code $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit 
 
 input * xkb_layout "us,ru"
 input * xkb_options "grp:win_space_toggle, grp:caps_toggle, grp_led:scroll"
-#input * xkb_options "grp:win_space_toggle, grp_led:scroll"
-#bindsym --to-code Caps_Lock input * xkb_switch_layout 1; exec pkill -RTMIN+1 waybar
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
@@ -50,6 +48,10 @@ bindsym F11 fullscreen toggle; move position 0 0
 bindsym F12 exec guake-toggle
 for_window [app_id="guake"] floating enable; sticky enable; move position 0 0
 exec guake
+
+#exec env XDG_CURRENT_DESKTOP=KDE ibus-daemon --daemonize --desktop=sway --replace
+#input * xkb_options "caps:hyper"
+#bindsym --to-code Caps_Lock exec ibus engine xkb:us::eng
 
 bar {
 	swaybar_command waybar
