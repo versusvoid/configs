@@ -40,6 +40,9 @@ function! s:switch_or_open(lines)
         for tabIndex in range(tabpagenr('$'))
 		for bufferIndex in tabpagebuflist(tabIndex + 1)
 			let bufinfo = getbufinfo(bufferIndex)[0]
+			if bufinfo['hidden']
+				continue
+			endif
 			for lineIndex in range(len(a:lines))
 				let line = fnamemodify(a:lines[lineIndex], ':p')
 				if bufinfo['name'] ==# line
