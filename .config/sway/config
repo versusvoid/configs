@@ -15,7 +15,7 @@ bindsym $mod+Return exec $term
 bindsym --to-code $mod+Shift+q kill
 bindsym Alt+F2 exec $menu
 bindsym Print exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H-%M-%S.png')
-bindsym Shift+Print exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H-%M-%S.png')
+bindsym Shift+Print exec grim -g "$(slurp 2>&1)" $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H-%M-%S.png')
 bindsym --to-code $mod+l exec $lock
 
 # Drag floating windows by holding down $mod and left mouse button.
