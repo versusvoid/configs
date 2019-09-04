@@ -36,30 +36,32 @@ nnoremap <silent> <C-s> :w<CR><C-s>
 set langmap=ё`йqцwуeкrеtнyгuшiщoзpх[ъ]фaыsвdаfпgрhоjлkдlж\\;э'яzчxсcмvиbтnьmб\\,ю.Ё~ЙQЦWУEКRЕTНYГUШIЩOЗPХ{Ъ}ФAЫSВDАFПGРHОJЛKДLЖ:Э\\"ЯZЧXСCМVИBТNЬMЮ>Б<
 iabbrev №   #
 
-function! s:switch_or_open(lines)
+function! init#switch_or_open(...)
+	let lines = a:000
         for tabIndex in range(tabpagenr('$'))
 		for bufferIndex in tabpagebuflist(tabIndex + 1)
 			let bufinfo = getbufinfo(bufferIndex)[0]
 			if bufinfo['hidden']
 				continue
 			endif
-			for lineIndex in range(len(a:lines))
-				let line = fnamemodify(a:lines[lineIndex], ':p')
+			for lineIndex in range(len(l:lines))
+				let line = fnamemodify(l:lines[lineIndex], ':p')
 				if bufinfo['name'] ==# line
 					execute "tabnext" (tabIndex + 1)
-					call remove(a:lines, lineIndex)
+					call remove(l:lines, lineIndex)
 					break
 				endif
 			endfor
 		endfor
         endfor
 
-	for line in a:lines
+	for line in l:lines
 		execute "tab split" line
 	endfor
 endfunction
+command -nargs=+ SwitchOrOpen call init#switch_or_open(<f-args>)
 
-let g:fzf_action = { 'ctrl-t': function('s:switch_or_open') }
+let g:fzf_action = { 'ctrl-t': 'SwitchOrOpen' }
 
 let g:ale_java_checkstyle_config = './checkstyle.xml'
 let g:ale_linters = { 'python': ['flake8'], 'java': ['checkstyle'] }
@@ -95,6 +97,6 @@ endif
 
 if $USER == "root"
 	colorscheme murphy
-	highlight Normal ctermbg=DarkRed
+	highlight Normal ctermbg=52
 endif
 
