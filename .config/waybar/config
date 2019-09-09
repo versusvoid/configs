@@ -10,10 +10,14 @@
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
+    "sway/window": {
+        "tooltip": false
+    },
     "tray": {
         "spacing": 10
     },
     "clock": {
+        "format": "{:%H:%M %d.%m}",
         "tooltip-format": "{:%Y-%m-%d | %H:%M}",
         "format-alt": "{:%Y-%m-%d}"
     },

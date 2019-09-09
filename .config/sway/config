@@ -55,7 +55,8 @@ bar {
 	swaybar_command waybar
 }
 
-hide_edge_borders vertical
+default_border pixel 2
+hide_edge_borders both
 
 # Switch to workspace
 bindsym $mod+F1 workspace 1
