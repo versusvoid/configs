@@ -90,6 +90,7 @@ if system("dconf read '/apps/guake/style/font/palette-name'") ==? "'Solarized Li
 	let g:solarized_contrast = "high"
 	let g:solarized_termtrans = 1
 	colorscheme solarized
+	highligh StatusLine cterm=reverse ctermfg=11 ctermbg=7
 else
 	set background=dark
 endif
