@@ -1,0 +1,7 @@
+#memory.warning {
+	color: orange;
+}
+
+#memory.critical {
+	color: red;
+}
