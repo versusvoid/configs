@@ -64,7 +64,7 @@ command! -nargs=+ SwitchOrOpen call init#switch_or_open(<f-args>)
 let g:fzf_action = { 'ctrl-t': 'SwitchOrOpen' }
 
 let g:ale_java_checkstyle_config = './checkstyle.xml'
-let g:ale_linters = { 'python': ['flake8', 'mypy'], 'java': ['checkstyle'] }
+let g:ale_linters = { 'python': ['flake8'], 'java': ['checkstyle'] }
 call plug#begin('~/.local/share/nvim/site/plugged')
 Plug 'dag/vim-fish'
 Plug 'junegunn/fzf.vim'
