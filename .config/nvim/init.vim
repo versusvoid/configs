@@ -5,7 +5,7 @@ if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
 	!yay -S --noconfirm --needed fzf
 	!mkdir -p ~/.local/share/nvim/site/autoload
 	!curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-    		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 if empty(glob('/usr/share/nvim/runtime/autoload/youcompleteme.vim'))
@@ -34,11 +34,11 @@ nnoremap <C-_> :Rg<cr>
 nnoremap <silent> <C-s> :w<CR><C-s>
 
 set langmap=ё`йqцwуeкrеtнyгuшiщoзpх[ъ]фaыsвdаfпgрhоjлkдlж\\;э'яzчxсcмvиbтnьmб\\,ю.Ё~ЙQЦWУEКRЕTНYГUШIЩOЗPХ{Ъ}ФAЫSВDАFПGРHОJЛKДLЖ:Э\\"ЯZЧXСCМVИBТNЬMЮ>Б<
-iabbrev №   #
+iabbrev № #
 
 function! init#switch_or_open(...)
-	let lines = a:000
-        for tabIndex in range(tabpagenr('$'))
+	let lines = a:000[:]
+	for tabIndex in range(tabpagenr('$'))
 		for bufferIndex in tabpagebuflist(tabIndex + 1)
 			let bufinfo = getbufinfo(bufferIndex)[0]
 			if bufinfo['hidden']
@@ -53,7 +53,7 @@ function! init#switch_or_open(...)
 				endif
 			endfor
 		endfor
-        endfor
+	endfor
 
 	for line in l:lines
 		execute "tab split" line
@@ -82,15 +82,17 @@ autocmd BufWritePre * %s/\s\+$//e
 
 let light = 0
 if system("pstree -ps " . getpid() . "| grep -o guake") ==? "guake\n"
-    if system("dconf read '/apps/guake/style/font/palette-name'") ==? "'Solarized Light'\n"
-	let light = 1
-    endif
+	if system("dconf read '/apps/guake/style/font/palette-name'") ==? "'Solarized Light'\n"
+		let light = 1
+	endif
 elseif system("pstree -ps " . getpid() . "| grep -o alacritty") ==? "alacritty\n"
-    if system("rg -N '^colors:' $HOME/.config/alacritty/alacritty.yml") ==? "colors: *light\n"
+	if system("rg -N '^colors:' $HOME/.config/alacritty/alacritty.yml") ==? "colors: *light\n"
+		let light = 1
+	endif
+elseif system("pstree -ps " . getpid() . "| grep -o gnome-terminal") ==? "gnome-terminal\n"
 	let light = 1
-    endif
 endif
-if light
+if light && $USER != "root"
 	set background=light
 	let g:solarized_contrast = "high"
 	let g:solarized_termtrans = 1
