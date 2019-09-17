@@ -51,9 +51,7 @@ exec guake
 #input * xkb_options "caps:hyper"
 #bindsym --to-code Caps_Lock exec ibus engine xkb:us::eng
 
-bar {
-	swaybar_command waybar
-}
+bar swaybar_command waybar
 
 default_border pixel 2
 hide_edge_borders both

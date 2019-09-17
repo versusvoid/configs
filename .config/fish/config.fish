@@ -3,7 +3,6 @@
 #set -x CXX /usr/bin/clang++
 set -x VISUAL nvim
 set -x EDITOR nvim
-set -x BROWSER firefox-developer-edition
 set -x RUSTC_WRAPPER sccache
 
 function fish_greeting
