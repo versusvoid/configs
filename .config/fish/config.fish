@@ -5,11 +5,6 @@ set -x VISUAL nvim
 set -x EDITOR nvim
 set -x RUSTC_WRAPPER sccache
 
-function fish_greeting
-    echo use fn fr ffn ffr fdn fdr
-    echo use peco as interactive grep
-end
-
 function smiley
     echo '¯\_(ツ)_/¯'
 end
@@ -39,6 +34,8 @@ alias suspend='systemctl suspend'
 alias view=$EDITOR
 alias less='less -R'
 alias free-packages 'yay -Qs (yay -Qttq | xargs echo | sed \'s/^/^\(/g; s/$/\)$/g; s/ /|/g\')'
+alias gsw='git switch'
+
 
 if functions -q fzf_key_bindings
     fzf_key_bindings
