@@ -31,10 +31,15 @@ bindsym --to-code $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit 
 
 input * xkb_layout "us,ru"
 input * xkb_options "grp:win_space_toggle, grp:caps_toggle, grp_led:scroll"
+
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
 
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
