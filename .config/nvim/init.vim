@@ -26,11 +26,13 @@ set nofixendofline
 set wildmode=longest:full
 set linebreak
 set fileencodings=utf-8,cp1251
+set nofixeol
 
 filetype off
 nnoremap <C-l> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 nnoremap <C-t> :FZF<cr>
 nnoremap <C-_> :Rg<cr>
+nnoremap <C-n> :Tags<cr>
 nnoremap <silent> <C-s> :w<CR><C-s>
 
 set langmap=ё`йqцwуeкrеtнyгuшiщoзpх[ъ]фaыsвdаfпgрhоjлkдlж\\;э'яzчxсcмvиbтnьmб\\,ю.Ё~ЙQЦWУEКRЕTНYГUШIЩOЗPХ{Ъ}ФAЫSВDАFПGРHОJЛKДLЖ:Э\\"ЯZЧXСCМVИBТNЬMЮ>Б<
