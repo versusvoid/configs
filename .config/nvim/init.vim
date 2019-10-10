@@ -68,13 +68,15 @@ let g:fzf_action = { 'ctrl-t': 'SwitchOrOpen' }
 let g:ale_java_checkstyle_config = './checkstyle.xml'
 let g:ale_linters = { 'python': ['flake8'], 'java': ['checkstyle'] }
 call plug#begin('~/.local/share/nvim/site/plugged')
-Plug 'dag/vim-fish'
+Plug 'dag/vim-fish', { 'for': 'fish' }
 Plug 'junegunn/fzf.vim'
+Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'w0rp/ale'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'HerringtonDarkholme/yats.vim'
+Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
 Plug 'altercation/vim-colors-solarized'
+Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
 call plug#end()
 
 set hidden
