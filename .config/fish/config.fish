@@ -35,6 +35,7 @@ alias view=$EDITOR
 alias less='less -R'
 alias free-packages 'yay -Qs (yay -Qttq | xargs echo | sed \'s/^/^\(/g; s/$/\)$/g; s/ /|/g\')'
 alias gsw='git switch'
+alias tree='tree -C'
 
 
 if functions -q fzf_key_bindings

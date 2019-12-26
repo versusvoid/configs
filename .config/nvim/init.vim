@@ -19,7 +19,6 @@ set ignorecase
 set smartcase
 set incsearch
 
-let g:pyindent_open_paren = 'shiftwidth()'
 set smartindent
 set foldmethod=indent
 set nofixendofline
@@ -67,6 +66,8 @@ let g:fzf_action = { 'ctrl-t': 'SwitchOrOpen' }
 
 let g:ale_java_checkstyle_config = './checkstyle.xml'
 let g:ale_linters = { 'python': ['flake8'], 'java': ['checkstyle'] }
+let g:ale_python_flake8_auto_pipenv = 1
+let g:ale_python_flake8_change_directory = 0
 call plug#begin('~/.local/share/nvim/site/plugged')
 Plug 'dag/vim-fish', { 'for': 'fish' }
 Plug 'junegunn/fzf.vim'
@@ -111,4 +112,3 @@ if $USER == "root"
 	colorscheme murphy
 	highlight Normal ctermbg=52
 endif
-
