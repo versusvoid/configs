@@ -1,10 +1,6 @@
 # vi: expandtab shiftwidth=4
 #set -x CC /usr/bin/clang
 #set -x CXX /usr/bin/clang++
-set -x VISUAL nvim
-set -x EDITOR nvim
-set -x RUSTC_WRAPPER sccache
-
 function smiley
     echo '¯\_(ツ)_/¯'
 end
@@ -31,7 +27,7 @@ alias fgrep='fgrep --color=auto'
 alias diff='diff --color=auto'
 alias tar='bsdtar'
 alias suspend='systemctl suspend'
-alias view=$EDITOR
+alias view="$EDITOR -R"
 alias less='less -R'
 alias free-packages 'yay -Qs (yay -Qttq | xargs echo | sed \'s/^/^\(/g; s/$/\)$/g; s/ /|/g\')'
 alias gsw='git switch'
@@ -40,11 +36,4 @@ alias tree='tree -C'
 
 if functions -q fzf_key_bindings
     fzf_key_bindings
-end
-
-if test -z "$SSH_AUTH_SOCK"
-    if ! pgrep -u "$USER" ssh-agent > /dev/null
-        ssh-agent -c | head -n 2 > "$XDG_RUNTIME_DIR/ssh-agent.env"
-    end
-    eval (cat $XDG_RUNTIME_DIR/ssh-agent.env)
 end

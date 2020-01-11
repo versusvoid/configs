@@ -30,7 +30,7 @@ bindsym --to-code $mod+Shift+c reload
 bindsym --to-code $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
 input * xkb_layout "us,ru"
-input * xkb_options "grp:win_space_toggle, grp:caps_toggle, grp_led:scroll"
+input * xkb_options "grp:caps_toggle, grp_led:scroll"
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
