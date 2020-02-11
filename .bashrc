@@ -27,10 +27,12 @@ export VISUAL=$EDITOR
 export RUSTC_WRAPPER=sccache
 
 # Jap
-export GTK_IM_MODULE=fcitx
-export GTK_IM_MODULE_FILE=/usr/lib/gtk-3.0/3.0.0/immodules.cache
-export XMODIFIERS=@im=fcitx
-export QT_IM_MODULE=fcitx
+if command -v fcitx > /dev/null; then
+	export GTK_IM_MODULE=fcitx
+	export GTK_IM_MODULE_FILE=/usr/lib/gtk-3.0/3.0.0/immodules.cache
+	export XMODIFIERS=@im=fcitx
+	export QT_IM_MODULE=fcitx
+fi
 
 # Wayland
 export QT_QPA_PLATFORM=wayland
