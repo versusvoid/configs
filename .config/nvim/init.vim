@@ -105,6 +105,7 @@ if light && $USER != "root"
 	highligh StatusLine cterm=reverse ctermfg=11 ctermbg=7
 else
 	set background=dark
+	highlight ALEError ctermbg=24
 endif
 
 

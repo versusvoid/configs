@@ -5,7 +5,7 @@ function vi
 	end
 
 	for arg in $argv
-		if string match -- '-*' $arg
+		if string match -- '-*' $arg; or test -w $arg
 			continue
 		end
 		if test -e $arg; and test (stat -c '%U' $arg) != (whoami)
